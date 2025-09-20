@@ -96,7 +96,7 @@ def advanced_lookup(username):
         return ({"user": None, "error": "rate limit"})
 
 
-def main(session_id, user_id=None, username=None):
+def process_request(session_id, user_id=None, username=None):
     assert user_id or username, "You must provide either a username or an ID"
     search_type = "id" if user_id else "username"
     search = user_id or username
@@ -171,7 +171,7 @@ def main(session_id, user_id=None, username=None):
     print("Profile Picture        : " + profile_pic_url)
 
 
-if __name__ == "__main__":
+def main():
     import argparse
 
     parser = argparse.ArgumentParser()
@@ -181,4 +181,8 @@ if __name__ == "__main__":
     group.add_argument('-i', '--id', help="User ID")
     args = parser.parse_args()
 
-    main(session_id=args.sessionid, username=args.username, user_id=args.id)
+    process_request(session_id=args.sessionid, username=args.username, user_id=args.id)
+
+
+if __name__ == "__main__":
+    main()
